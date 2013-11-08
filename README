@@ -1,0 +1,51 @@
+openocd-qtgui readme
+
+Overview:
+
+OpenOCD-QtGUI is a graphical frontend for OpenOCD.
+It's built with the Qt Window Framework. 
+
+
+Author:
+
+Sven Sperner		<cethss@gmail.com>
+
+
+Checkout:
+
+git clone https://github.com/sperner/OpenOCD-QtGUI
+
+
+Dependencies:
+
+OpenOCD-QtGUI depends on QtTelnet which is included.
+
+
+Compile:
+
+qmake -project
+mv OpenOCD-QtGUI.pro OpenOCD-QtGUI.pro.tmp
+cat OpenOCD-QtGUI.pro.tmp | sed 's/\#\ Input/QT\ +=\ network/g' > OpenOCD-QtGUI.pro
+rm OpenOCD-QtGUI.pro.tmp
+qmake
+make
+
+or simply:
+
+./doit.sh
+
+
+Configurations:
+
+Configuration file:	openocd-qtgui.conf
+
+
+Qt-Creator:
+
+This project was developed using the Qt-Creator.
+The project file is included in the package.
+
+
+Usage:
+
+OpenOCD-QtGUI
