@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define SAM7_VERSION "0.3.2"
+#define SAM7_VERSION "0.3.3"
 
 #include "mainwidget.h"
 #include "ui_mainwidget.h"
@@ -122,7 +122,9 @@ MainWidget::~MainWidget()
 void MainWidget::connectToServer()
 {
     if (main->pushButtonOocdConnect->text() == "Connect")
+    {
         telnet->connectToHost(main->lineEditHost->text(), main->lineEditPort->text().toInt());
+    }
     else
     {
         telnet->close();
@@ -151,7 +153,9 @@ void MainWidget::resetOocd()
         main->textEditOutput->append("GUI: Reset Connection");
     }
     else
+    {
         main->textEditOutput->append("GUI: Not connected");
+    }
 }
 
 
@@ -229,9 +233,13 @@ void MainWidget::flashLoad() // download image to FLASH
     {
         telnet->sendData("soft_reset_halt");
         if (main->checkBoxErase->isChecked())
-            telnet->sendData(main->lineEditFlashWriteCmd->text() + " erase " + main->lineEditFlash->text() + " 0x100000 bin");
+	{
+	    telnet->sendData(main->lineEditFlashWriteCmd->text() + " erase " + main->lineEditFlash->text() + " 0x100000 bin");
+	}
         else
+	{
             telnet->sendData(main->lineEditFlashWriteCmd->text() + " " + main->lineEditFlash->text() + " 0x100000 bin");
+	}
     }
 }
 
@@ -517,6 +525,3 @@ void MainWidget::removeEmptyLines()
 {
 
 }
-
-
-
